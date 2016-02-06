@@ -23,13 +23,14 @@ app.send = function(){
     roomname: 'lobby'
   };
 
-  $.ajax({
+  var apiPOST = $.ajax({
     type: "POST",
     url: "https://api.parse.com/1/classes/chatterbox",
     data: JSON.stringify(message),
-    success: function(){}
+    success: function(){} 
     
   })
+  console.log(apiPOST)
 };
 
 
@@ -60,22 +61,23 @@ app.clearMessages = function(){
   $("#chats").html('');
 };
 
-app.addMessage = function(){
+app.addMessage = function(message){
   var message =  {
   username: 'Mel Brooks',
   text: 'Never underestimate the power of the Schwartz!',
   roomname: 'lobby'
   };
   var $message = $(message);
-  $message = ("<div>" + message +"</div>")
+  $message = ("<div>" + message.username + ": " + message.text + "</div>")
 
   $('#chats').append($message);
   
 };
 
+
 app.addRoom = function(message){
   var $message = $(message);
-  $message = ("<div>" + message + "</div>");
+  $message = ("<option>" + message.roomname + "</option >");
   $('#roomSelect').append($message);
 };
 
